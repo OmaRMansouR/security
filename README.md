@@ -11,11 +11,6 @@ chmod 777 requirements.sh
 ./requirements.sh
 ```
 
-- Database Initialization
-```
-python3 initialize-database.py
-```
-
 - Running Application
 ```
 flask run
@@ -23,4 +18,9 @@ flask run
 or
 ```
 python3 app.py
+```
+
+- Test SQL Injection
+```
+python3 perform_injection.py
 ```
