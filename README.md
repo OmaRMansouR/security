@@ -15,3 +15,12 @@ chmod 777 requirements.sh
 ```
 python3 initialize-database.py
 ```
+
+- Running Application
+```
+flask run
+```
+or
+```
+python3 app.py
+```
