@@ -1,5 +1,4 @@
-from urllib import request, response
-from warnings import catch_warnings
+from urllib import request
 from flask import Flask, request
 from flask_cors import CORS
 from urllib.parse import unquote
@@ -27,9 +26,6 @@ def select_image():
     sqlite3_connection = sqlite3.connect('flags.db')
     query = "SELECT image_path FROM images WHERE user_id=" + user_id + ""
     image = sqlite3_connection.execute(query).fetchall()
-    # injection_query = query + \
-    # " AND 1=2 UNION SELECT name FROM sqlite_master WHERE type ='table' AND name NOT LIKE 'sqlite_%';"
-    # # image = sqlite3_connection.execute(injection_query).fetchall()
     try:
         res = {"image": image[0]}
     except:
