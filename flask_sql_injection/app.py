@@ -1,4 +1,3 @@
-from urllib import request
 from flask import Flask, request
 from flask_cors import CORS
 from urllib.parse import unquote
