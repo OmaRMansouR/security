@@ -24,3 +24,21 @@ python3 app.py
 ```
 python3 perform_injection.py
 ```
+
+# Node SQL Injection
+- Environment Setup
+Run these 2 commands
+```
+cd node_sql_injection
+```
+```
+npm install
+```
+- Running Application
+```
+node app.js
+```
+- Test SQL Injection
+```
+TODO
+```
