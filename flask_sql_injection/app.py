@@ -1,12 +1,27 @@
 from flask import Flask, request
 from flask_cors import CORS
+# from flask_login import LoginManager, UserMixin
 from urllib.parse import unquote
 import sqlite3
 import json
 import os
 
+# class User(UserMixin):
+#     def is_authenticated(self):
+#         return True
+#     def is_active(self):
+#         return True
+#     def get_id(self):
+#         return chr(1)
+
 app = Flask(__name__)
 CORS(app)
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User()
 
 @app.route('/initialize-database', methods = ['GET', 'OPTIONS'])
 def initialize_database():
