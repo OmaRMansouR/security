@@ -81,7 +81,8 @@ const routes: Routes = [
         component: CardsComponent
       },
       {
-        path: 'carousel',
+        // path: 'carousel',
+        path: 'photos',
         component: CarouselComponent
       },
       {
