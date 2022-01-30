@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: () => import('./views/pages/ui-components/ui-components.module').then(m => m.UiComponentsModule)
       },
       {
+        path: 'admin',
+        loadChildren: () => import('./views/pages/admin/admin.module').then(m => m.AdminModule)
+      },
+      {
         path: 'advanced-ui',
         loadChildren: () => import('./views/pages/advanced-ui/advanced-ui.module').then(m => m.AdvancedUiModule)
       },
