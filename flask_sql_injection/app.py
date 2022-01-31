@@ -34,8 +34,8 @@ def initialize_database():
     sqlite3_connection = sqlite3.connect('flags.db')
     sqlite3_connection.execute('CREATE TABLE images(user_id Integer, image_path TEXT)')
     sqlite3_connection.execute('CREATE TABLE users(user_id Integer, password TEXT)')
-    sqlite3_connection.execute("INSERT INTO users(user_id, password) VALUES(7, 'notPassword')")
-    sqlite3_connection.execute("INSERT INTO images(user_id, image_path) VALUES(7, '/your/normal/image')")
+    sqlite3_connection.execute("INSERT INTO users(user_id, password) VALUES(1234567890, 'notPassword')")
+    sqlite3_connection.execute("INSERT INTO images(user_id, image_path) VALUES(1234567890, '/your/normal/image')")
     sqlite3_connection.commit()
     sqlite3_connection.close()
     return json.dumps({"message":"Database created successfully!"})
@@ -44,7 +44,11 @@ def initialize_database():
 def select_image():
     user_id = unquote(request.args['user_id'])
     sqlite3_connection = sqlite3.connect('flags.db')
-    if auth.is_authenticated(int(user_id)):
+    try:
+        id_check = int(user_id[0:10])
+    except:
+        return json.dumps({"msg": "invalid phone number"})
+    if auth.is_authenticated(id_check):
         query = "SELECT image_path FROM images WHERE user_id=" + user_id
         image = sqlite3_connection.execute(query).fetchall()
         try:
