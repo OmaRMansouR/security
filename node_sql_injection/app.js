@@ -5,6 +5,36 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+class simple_authentication
+{
+  authenticated_users = []
+
+  reset_authentication()
+  {
+    this.authenticated_users = []
+    console.log("auth reset")
+  }
+
+  is_authenticated(id)
+  {
+    let uid = parseInt(id)
+    if (this.authenticated_users.includes(uid))
+    {
+      return true
+    }
+    return false
+  }
+
+  authenticate(id)
+  {
+    let uid = parseInt(id)
+    this.authenticated_users.push(uid)
+  }
+}
+
+auth = new simple_authentication()
+setInterval(auth.reset_authentication, 120000)
+
 app.get('/', (req, res) => {
   res.send("Backend is up and running!")
 })
@@ -41,17 +71,55 @@ app.get('/initialize-database', (req, res) => {
 
 app.get('/select-image', (req, res) => {
   const user_id = req.query.user_id
-  let db = new sqlite3.Database('flags.db');
-  // db.all("SELECT image_path FROM images WHERE user_id=" + user_id,
-  db.all("SELECT * FROM images",
-        function(err, rows)
-          {
-            if (err) {res.json({"image": "Invalid User ID"})}
-            rows.forEach(function(row)
+  try
+  {
+    id_check = parseInt(user_id)
+  }
+  catch
+  {
+    res.json({"msg": "invalid phone number"})
+  }
+  if(!auth.is_authenticated(id_check))
+  {
+    res.json({"msg": "Not authorized"})
+  }
+  else
+  {
+    let db = new sqlite3.Database('flags.db');
+    db.all("SELECT image_path FROM images WHERE user_id=" + user_id,
+          function(err, rows)
             {
-              console.log(row)
-            })
-            res.json(rows)
-          }
-        )
+              if (err) {res.json({"image": "Invalid User ID"})}
+              try
+              {
+                res.json({"image": rows[0].image_path})
+              }
+              catch
+              {
+                res.json({"image": "Invalid User ID"})
+              }
+            }
+          )
+  }
 });
+
+app.get('/login', (req, res) =>
+{
+  const user_id = req.query.user_id
+  const pw = req.query.password
+  let db = new sqlite3.Database('flags.db');
+  db.all("SELECT * FROM users WHERE user_id=" + user_id + " AND password='" + pw + "'",
+  function(err, rows)
+    {
+      if (rows.length > 0)
+        {
+          auth.authenticate(user_id)
+          resp = {}
+          resp[user_id] = "authenticated"
+          res.json(resp)
+        }
+      else
+        res.json({"msg" : "Incorrect username/password"})
+    }
+  )
+})
