@@ -133,7 +133,7 @@ export class PhotosComponent {
 })
 export class PhotosComponent implements OnInit {
 
-  images = ['assets/images/others/place1.jpg', 'assets/images/others/place2.jpg', 'assets/images/others/place3.jpg'];
+  images = ['assets/images/others/place1.jpg', 'assets/images/others/place2.jpg', 'assets/images/others/place5.jpg'];
 
   slidesOnlyCode: any;
   widthControlsCode: any;
