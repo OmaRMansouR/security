@@ -69,7 +69,6 @@ def login():
     pw = unquote(request.args['password'])
     sqlite3_connection = sqlite3.connect('flags.db')
     c_query = "SELECT * FROM users WHERE user_id=" + user_id + " AND password='" + pw + "'"
-    print(c_query)
     cur = sqlite3_connection.execute(c_query)
     d = cur.fetchall()
     if len(d) > 0:
