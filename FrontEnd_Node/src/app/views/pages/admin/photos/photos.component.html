@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-xl-10 main-content ps-xl-4 pe-xl-5">
+      <h1 class="page-title">System User Photos</h1>
+      <hr>
+  
+      <h4 #withCaptions>Employees</h4>
+      <p class="mb-3">Profiles</p>
+      <div class="example">
+        <ngb-carousel *ngIf="images" [showNavigationArrows]="true" [showNavigationIndicators]="true">
+          <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+              <img [src]="images[0]" class="d-block w-100" alt="Random first slide">
+            </div>
+            <div class="carousel-caption">
+              <h5>Jack Doov</h5>
+              <p>Head of Marketing</p>
+            </div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+              <img [src]="images[1]" class="d-block w-100" alt="Random second slide">
+            </div>
+            <div class="carousel-caption">
+              <h5>Sam Grey</h5>
+              <p>Head of Human Resources</p>
+            </div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+              <img [src]="images[2]" class="d-block w-100" alt="Random third slide">
+            </div>
+            <div class="carousel-caption">
+              <h5>Congrats!!!</h5>
+              <p>YOU GOT YOUR SECOND PART OF THE FLAG</p>
+            </div>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <app-code-preview [codeContent]="widthCaptionsCode"></app-code-preview>
+      
+    </div>
+
+  </div>
