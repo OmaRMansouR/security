@@ -58,14 +58,18 @@ app.get('/initialize-database', (req, res) => {
     if (err) {res.json("restart server")}
     db.run('CREATE TABLE users(user_id Integer, password TEXT)', (err) => {
       if (err) {res.json("restart server")}
-      db.run("INSERT INTO users(user_id, password) VALUES(1234567890, 'notPassword')", (err) => {
+      db.run("INSERT INTO users(user_id, password) VALUES(1234567890, 'notPassword')",(err) => {
+        if (err) {res.json("restart server")}
+        db.run("INSERT INTO users(user_id, password) VALUES(9999999999, 'MySecureBossAccount')",(err) => {
+          if (err) {res.json("restart server")}
+          db.run("INSERT INTO images(user_id, image_path) VALUES(9999999999, '/assets/images/screenshots/cover30.jpg')", (err) => {
         if (err) {res.json("restart server")}
         db.run("INSERT INTO images(user_id, image_path) VALUES(1234567890, '/your/normal/image')",
         (err) => {
           if (err) {res.json("restart server")}
           db.close()
           res.json({"message":"Database created successfully!"})
-  })})})})
+  })})})})})})
   
 })
 
